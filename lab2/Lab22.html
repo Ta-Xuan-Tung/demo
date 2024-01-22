@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #input {
+            width: 300px;
+            height: 100px;
+        }
+
+        #output {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <label for="input">Danh sách biến (mỗi biến trên một dòng):</label><br>
+    <textarea id="input"></textarea><br>
+    <button onclick="convertToCamelCase()">Chuyển đổi</button>
+    <div id="output"></div>
+
+    <script>
+        function convertToCamelCase() {
+            const input = document.getElementById('input').value;
+            const variables = input.split('\n');
+            let output = '';
+
+            variables.forEach(variable => {
+                const words = variable.split('_');
+                let result = words[0];
+
+                for (let i = 1; i < words.length; i++) {
+                    const capitalizedWord = words[i][0].toUpperCase() + words[i].slice(1);
+                    result += capitalizedWord;
+                }
+
+                output += `${variable} -> ${result} ${'✅'.repeat(result.length)}<br>`;
+            });
+
+            document.getElementById('output').innerHTML = output;
+        }
+    </script>
+</body>
+</html>

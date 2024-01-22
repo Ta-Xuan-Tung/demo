@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+    // Mảng kết hợp [phút diễn ra, tên hành động]
+const events = [
+    [5, '⚽ GOAL'],
+    [15, '🔄 Substitution'],
+    [30, '🟨 Yellow Card'],
+    [45, '⚽ GOAL'],
+    [64, '🟥 Red Card'],
+    [75, '⚽ GOAL'],
+    [80, '🔄 Substitution'],
+  ];
+  
+  // 1. Tạo mảng các sự kiện khác nhau
+  const uniqueEvents = [...new Set(events.map(event => event[1]))];
+  
+  // 2. Xóa sự kiện thẻ vàng phút 64
+  const filteredEvents = events.filter(event => !(event[0] === 64 && event[1] === '🟨 Yellow Card'));
+  
+  // 3. In ra console số sự kiện và trung bình mỗi 9 phút
+  const totalEvents = events.length;
+  const averagePerMinute = totalEvents / 90;
+  console.log(`${totalEvents} sự kiện xảy ra, trung bình mỗi ${Math.round(90 / averagePerMinute)} phút`);
+  
+  // 4. Lặp toàn bộ mảng sự kiện và in ra màn hình, đánh dấu đối với mỗi sự kiện trong hiệp 1 hay hiệp 2
+  events.forEach(event => {
+    const minute = event[0];
+    const action = event[1];
+    const half = minute <= 45 ? '[FIRST HALF]' : '[SECOND HALF]';
+    console.log(`${half} ${minute}: ${action}`);
+  });
+  
+   </script>
+</body>
+</html>
